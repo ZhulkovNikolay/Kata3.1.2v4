@@ -1,9 +1,6 @@
 package ru.kata.spring.boot_security.demo.rest;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
 
 import java.util.List;
@@ -31,4 +28,16 @@ public class UserRestController {
                 .findFirst().orElse(null);
     }
 
+    @PostMapping
+    public User create(@RequestBody User user) {
+        this.USERS.add(user);
+        return user;
+    }
+
+    @DeleteMapping
+    public void deleteById(@PathVariable Long id) {
+        this.USERS.removeIf(user -> user.getId().equals(id));
+    }
+
 }
+
